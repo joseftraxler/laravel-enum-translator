@@ -50,7 +50,7 @@ trait TranslatableEnum
         $ref = new \ReflectionEnumUnitCase(self::class, $this->name);
         $attributes = $ref->getAttributes(Attributes\Trans::class);
 
-        if ( ! isset($attributes[0])) {
+        if (! isset($attributes[0])) {
             return null;
         }
 
