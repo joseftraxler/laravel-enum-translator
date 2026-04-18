@@ -1,18 +1,35 @@
 {
     "name": "joseftraxler/laravel-enum-translator",
-    "description": "Laravel extension for translating native php enum values.",
+    "description": "Lightweight Laravel helper for translating native PHP enums using attributes, Laravel translator, or human-readable fallback.",
     "type": "library",
     "license": "MIT",
-    "autoload": {
-        "psr-4": {
-            "JosefTraxler\\LaravelEnumTranslator\\": "src/"
-        }
+    "keywords": [
+        "laravel",
+        "enum",
+        "translation",
+        "translator",
+        "php-enum",
+        "laravel-enum",
+        "attribute",
+        "localization",
+        "i18n",
+        "l10n"
+    ],
+    "homepage": "https://github.com/JosefTraxler/laravel-enum-translator",
+    "support": {
+        "issues": "https://github.com/JosefTraxler/laravel-enum-translator/issues",
+        "source": "https://github.com/JosefTraxler/laravel-enum-translator"
     },
     "authors": [
         {
             "name": "Josef Traxler"
         }
     ],
+    "autoload": {
+        "psr-4": {
+            "JosefTraxler\\LaravelEnumTranslator\\": "src/"
+        }
+    },
     "require": {
         "php": ">=8.4",
         "illuminate/support": ">=12",
@@ -26,5 +43,7 @@
         "cs-fix": "php-cs-fixer fix",
         "cs": "php-cs-fixer check",
         "stan": "phpstan analyse src -l max"
-    }
+    },
+    "minimum-stability": "stable",
+    "prefer-stable": true
 }
