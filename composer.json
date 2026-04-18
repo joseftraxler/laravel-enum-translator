@@ -13,5 +13,9 @@
             "name": "Josef Traxler"
         }
     ],
-    "require": {}
+    "require": {
+        "php": ">=8.4",
+        "illuminate/support": ">=12",
+        "illuminate/contracts": ">=12"
+    }
 }
