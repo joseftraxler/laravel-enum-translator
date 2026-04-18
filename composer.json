@@ -1,0 +1,17 @@
+{
+    "name": "joseftraxler/laravel-enum-translator",
+    "description": "Laravel extension for translating native php enum values.",
+    "type": "library",
+    "license": "MIT",
+    "autoload": {
+        "psr-4": {
+            "JosefTraxler\\LaravelEnumTranslator\\": "src/"
+        }
+    },
+    "authors": [
+        {
+            "name": "Josef Traxler"
+        }
+    ],
+    "require": {}
+}
