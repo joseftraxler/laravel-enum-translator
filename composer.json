@@ -30,6 +30,11 @@
             "JosefTraxler\\LaravelEnumTranslator\\": "src/"
         }
     },
+    "autoload-dev": {
+        "psr-4": {
+            "Tests\\": "tests/"
+        }
+    },
     "require": {
         "php": ">=8.4",
         "illuminate/support": ">=12",
@@ -37,12 +42,14 @@
     },
     "require-dev": {
         "friendsofphp/php-cs-fixer": "^3.95",
-        "phpstan/phpstan": "^2.1"
+        "phpstan/phpstan": "^2.1",
+        "pestphp/pest": "^4.6"
     },
     "scripts": {
         "cs-fix": "php-cs-fixer fix",
         "cs": "php-cs-fixer check",
-        "stan": "phpstan analyse src -l max"
+        "stan": "phpstan analyse src tests -l max",
+        "test": "pest"
     },
     "minimum-stability": "stable",
     "prefer-stable": true
