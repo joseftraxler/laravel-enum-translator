@@ -5,6 +5,7 @@
 ![PHP Version](https://img.shields.io/badge/PHP-8.4%2B-777BB4?style=flat-square&logo=php)
 ![Laravel Version](https://img.shields.io/badge/Laravel-12%2B-FF2D20?style=flat-square&logo=laravel)
 ![License](https://img.shields.io/badge/license-MIT-green.svg?style=flat-square)
+[![CI](https://github.com/joseftraxler/laravel-enum-translator/actions/workflows/CI.yml/badge.svg)](https://github.com/joseftraxler/laravel-enum-translator/actions/workflows/CI.yml)
 
 Lightweight Laravel helper for translating native PHP enums using attributes, Laravel’s translator, or automatic human‑readable fallback.
 
