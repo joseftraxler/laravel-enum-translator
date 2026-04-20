@@ -19,11 +19,14 @@ trait TranslatableEnum
             ?? $this->humanReadableValue();
     }
 
+    /**
+     * @phpstan-return array<(self is \BackedEnum ? value-of<self> : key-of<self>),string>
+     */
     public static function selectOptions(): array
     {
         $result = [];
         foreach (self::cases() as $case) {
-            $result[$case->{self::getTransPropName()}] = $case->trans();
+            $result[$case->{$case->getTransPropName()}] = $case->trans();
         }
         return $result;
     }
@@ -35,14 +38,13 @@ trait TranslatableEnum
     }
 
     /**
-     * @return "value"|"name"
-     *
-     * @phpstan-return (self is \BackedEnum ? 'value' : 'name')
+     * @return ($this is \BackedEnum ? "value" : "name")
      */
-    private static function getTransPropName(): string
+    private function getTransPropName(): string
     {
         static $propName;
-        return $propName ??= (is_subclass_of(self::class, \BackedEnum::class) ? 'value' : 'name');
+        /** @var ($this is \BackedEnum ? "value" : "name") */
+        return $propName ??= ($this instanceof \BackedEnum) ? 'value' : 'name';
     }
 
     private function transByAttribute(): ?string
@@ -59,7 +61,7 @@ trait TranslatableEnum
 
     private function transByTranslator(): ?string
     {
-        $key = static::translatorNamespace() . '.' . $this->{self::getTransPropName()};
+        $key = static::translatorNamespace() . '.' . $this->{$this->getTransPropName()};
 
         $candidate = self::getTranslatorInstance()->get($key);
 
@@ -78,14 +80,14 @@ trait TranslatableEnum
 
     private function humanReadableValue(): string
     {
-        $value = $this->{self::getTransPropName()};
+        $value = $this->{$this->getTransPropName()};
 
-        if (strtoupper($value) === $value) {
+        if (strtoupper($value) === $value) {// @phpstan-ignore identical.alwaysFalse
             return $value;
         }
 
         $value =  str_replace(['_', '-'], ' ', $value);
-        $value = preg_replace('/(?<!^)([A-Z])/', ' $1', $value);
+        $value = (string) preg_replace('/(?<!^)([A-Z])/', ' $1', $value);
         $value = trim($value);
         $value = mb_ucfirst($value);
 

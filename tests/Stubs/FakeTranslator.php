@@ -8,6 +8,7 @@ use Illuminate\Contracts\Translation\Translator;
 
 final class FakeTranslator implements Translator
 {
+    /** @var array<string, string> */
     private array $lines = [];
 
     public function addLine(string $key, string $value): self
@@ -16,11 +17,21 @@ final class FakeTranslator implements Translator
         return $this;
     }
 
+    /**
+     * @param string $key
+     * @param array<string,string> $replace
+     *
+     * @return string
+     */
     public function get($key, array $replace = [], $locale = null)
     {
         return $this->lines[$key] ?? $key;
     }
 
+    /**
+     * @param int $number
+     * @param array<string,string> $replace
+     */
     public function choice($key, $number, array $replace = [], $locale = null)
     {
         return $this->get($key);
@@ -33,6 +44,6 @@ final class FakeTranslator implements Translator
 
     public function setLocale($locale)
     {
-        return \Illuminate\Support\Facades\App::setLocale($locale);
+        \Illuminate\Support\Facades\App::setLocale($locale);
     }
 }

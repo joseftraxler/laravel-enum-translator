@@ -7,8 +7,12 @@ namespace Tests\Stubs;
 use ArrayAccess;
 use Illuminate\Contracts\Foundation\Application;
 
+/**
+ * @implements ArrayAccess<string,mixed>
+ */
 final class FakeApplication implements Application, ArrayAccess
 {
+    /** @var array<string,mixed> */
     private array $instances = [];
 
     public function __construct()
@@ -20,49 +24,52 @@ final class FakeApplication implements Application, ArrayAccess
 
     public function version()
     {
-        // Unnecessary for tests
+        return 'test';
     }
 
     public function basePath($path = '')
     {
-        // Unnecessary for tests
+        return '';
     }
 
     public function bootstrapPath($path = '')
     {
-        // Unnecessary for tests
+        return '';
     }
 
     public function configPath($path = '')
     {
-        // Unnecessary for tests
+        return '';
     }
 
     public function databasePath($path = '')
     {
-        // Unnecessary for tests
+        return '';
     }
 
     public function langPath($path = '')
     {
-        // Unnecessary for tests
+        return '';
     }
 
     public function publicPath($path = '')
     {
-        // Unnecessary for tests
+        return '';
     }
 
     public function resourcePath($path = '')
     {
-        // Unnecessary for tests
+        return '';
     }
 
     public function storagePath($path = '')
     {
-        // Unnecessary for tests
+        return '';
     }
 
+    /**
+     * @param list<string> ...$environments
+     */
     public function environment(...$environments)
     {
         return count($environments) === 0 ? 'testing' : in_array('testing', $environments, true);
@@ -85,7 +92,7 @@ final class FakeApplication implements Application, ArrayAccess
 
     public function maintenanceMode()
     {
-        return false;
+        throw new \RuntimeException('Maintenance mode is disabled.');
     }
 
     public function isDownForMaintenance()
@@ -99,27 +106,26 @@ final class FakeApplication implements Application, ArrayAccess
 
     public function register($provider, $force = false)
     {
-        // Unnecessary for tests
+        throw new \RuntimeException('Not implemented yet');
     }
 
     public function registerDeferredProvider($provider, $service = null)
     {
-        // Unnecessary for tests
+        throw new \RuntimeException('Not implemented yet');
     }
 
     public function resolveProvider($provider)
     {
-        // Unnecessary for tests
+        throw new \RuntimeException('Not implemented yet');
     }
 
     public function boot()
     {
-        // Unnecessary for tests
     }
 
     public function booting($callback)
     {
-        // Unnecessary for tests
+        throw new \RuntimeException('Not implemented yet');
     }
 
     public function booted($callback)
@@ -127,6 +133,9 @@ final class FakeApplication implements Application, ArrayAccess
         // Unnecessary for tests
     }
 
+    /**
+     * @param array<array-key,mixed> $bootstrappers
+     */
     public function bootstrapWith(array $bootstrappers)
     {
         // Unnecessary for tests
@@ -142,6 +151,9 @@ final class FakeApplication implements Application, ArrayAccess
         return '';
     }
 
+    /**
+     * @return array<string,mixed>
+     */
     public function getProviders($provider)
     {
         return [];
@@ -169,7 +181,7 @@ final class FakeApplication implements Application, ArrayAccess
 
     public function terminating($callback)
     {
-        // Unnecessary for tests
+        return $this;
     }
 
     public function terminate()
@@ -184,47 +196,57 @@ final class FakeApplication implements Application, ArrayAccess
 
     public function bound($abstract)
     {
-        return $this->make($abstract);
+        throw new \RuntimeException('Not implemented yet');
     }
 
     public function alias($abstract, $alias)
     {
-        // Unnecessary for tests
+        throw new \RuntimeException('Not implemented yet');
     }
 
+    /**
+     * @param array<mixed> $abstracts
+     * @param array<mixed> $tags
+     */
     public function tag($abstracts, $tags)
     {
-        // Unnecessary for tests
+        throw new \RuntimeException('Not implemented yet');
     }
 
+    /**
+     * @return array<mixed>
+     */
     public function tagged($tag)
     {
-        // Unnecessary for tests
+        throw new \RuntimeException('Not implemented yet');
     }
 
     public function bind($abstract, $concrete = null, $shared = false)
     {
-        // Unnecessary for tests
+        throw new \RuntimeException('Not implemented yet');
     }
 
+    /**
+     * @param array<string>|string $method
+     */
     public function bindMethod($method, $callback)
     {
-        // Unnecessary for tests
+        throw new \RuntimeException('Not implemented yet');
     }
 
     public function bindIf($abstract, $concrete = null, $shared = false)
     {
-        // Unnecessary for tests
+        throw new \RuntimeException('Not implemented yet');
     }
 
     public function singleton($abstract, $concrete = null)
     {
-        // Unnecessary for tests
+        throw new \RuntimeException('Not implemented yet');
     }
 
     public function singletonIf($abstract, $concrete = null)
     {
-        // Unnecessary for tests
+        throw new \RuntimeException('Not implemented yet');
     }
 
     public function scoped($abstract, $concrete = null)
@@ -244,7 +266,10 @@ final class FakeApplication implements Application, ArrayAccess
 
     public function instance($abstract, $instance)
     {
-        $this->instances[$abstract] = $instance;
+        if ($abstract instanceof \Closure) {
+            throw new \RuntimeException('Not implemented yet');
+        }
+        return $this->instances[$abstract] = $instance;
     }
 
     public function addContextualBinding($concrete, $abstract, $implementation)
@@ -252,14 +277,18 @@ final class FakeApplication implements Application, ArrayAccess
         // Unnecessary for tests
     }
 
+    /**
+     * @param array<string>|string $concrete
+     * @return mixed
+     */
     public function when($concrete)
     {
-        // Unnecessary for tests
+        throw new \RuntimeException('Not implemented yet');
     }
 
     public function factory($abstract)
     {
-        // Unnecessary for tests
+        throw new \RuntimeException('Not implemented yet');
     }
 
     public function flush()
@@ -267,12 +296,18 @@ final class FakeApplication implements Application, ArrayAccess
         // Unnecessary for tests
     }
 
+    /**
+     * @param array<string,mixed> $parameters
+     */
     public function make($abstract, array $parameters = [])
     {
         return $this->instances[$abstract]
             ?? throw new \RuntimeException("Failed to resolve {$abstract}");
     }
 
+    /**
+     * @param array<string,mixed> $parameters
+     */
     public function call($callback, array $parameters = [], $defaultMethod = null)
     {
         // Unnecessary for tests
@@ -280,7 +315,7 @@ final class FakeApplication implements Application, ArrayAccess
 
     public function resolved($abstract)
     {
-        return $this->make($abstract);
+        return $this->has($abstract);
     }
 
     public function beforeResolving($abstract, ?\Closure $callback = null)
@@ -315,6 +350,9 @@ final class FakeApplication implements Application, ArrayAccess
 
     public function offsetSet(mixed $offset, mixed $value): void
     {
+        if ($offset === null) {
+            throw new \RuntimeException('Cannot set a null key value.');
+        }
         $this->instance($offset, $value);
     }
 
