@@ -38,6 +38,9 @@ jobs:
             -   name: Check PHP Code style
                 run: composer cs
 
+            -   name: Check static analysis
+                run: composer stan
+
     tests:
         runs-on: ubuntu-latest
         steps:
