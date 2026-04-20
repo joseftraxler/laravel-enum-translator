@@ -68,4 +68,4 @@ jobs:
                       --classmap-authoritative
 
             -   name: Run tests
-                run: ./vendor/bin/pest --ci
+                run: ./vendor/bin/pest
