@@ -26,6 +26,7 @@ jobs:
 
             -   name: Install composer
                 run: |
+                    composer config allow-plugins.pestphp/pest-plugin false
                     composer install \
                       --prefer-dist \
                       --no-interaction \
@@ -57,6 +58,7 @@ jobs:
 
             -   name: Install composer
                 run: |
+                    composer config allow-plugins.pestphp/pest-plugin false
                     composer install \
                       --prefer-dist \
                       --no-interaction \
