@@ -8,7 +8,7 @@ use Illuminate\Contracts\Translation\Translator;
 use Illuminate\Support\Facades\App;
 
 /**
- * @phpstan-require-implements \BackedEnum
+ * @phpstan-require-implements \UnitEnum
  */
 trait TranslatableEnum
 {
@@ -94,6 +94,6 @@ trait TranslatableEnum
 
     private static function translatorNamespace(): string
     {
-        return 'enum.' . static::class;
+        return 'enums.' . static::class;
     }
 }
