@@ -1,0 +1,31 @@
+name: Sync main with v1.x
+
+on:
+    push:
+        branches:
+            - v1.x
+
+permissions:
+    contents: write
+
+jobs:
+    sync:
+        runs-on: ubuntu-latest
+        steps:
+            - name: Checkout main
+              uses: actions/checkout@v4
+              with:
+                  ref: main
+                  fetch-depth: 0
+
+            - name: Add v1.x remote ref
+              run: |
+                  git fetch origin v1.x:v1.x
+
+            - name: Fast-forward merge
+              run: |
+                  git merge --ff-only v1.x || exit 0
+
+            - name: Push updated main
+              run: |
+                  git push origin main
