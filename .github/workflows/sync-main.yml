@@ -12,20 +12,15 @@ jobs:
     sync:
         runs-on: ubuntu-latest
         steps:
-            - name: Checkout main
-              uses: actions/checkout@v6
-              with:
-                  ref: main
-                  fetch-depth: 0
+            -   name: Checkout main
+                uses: actions/checkout@v6
+                with:
+                    ref: main
+                    fetch-depth: 0
 
-            - name: Add v1.x remote ref
-              run: |
-                  git fetch origin v1.x:v1.x
+            -   name: Force reset main to v1.x
+                run: |
+                    git fetch origin v1.x
+                    git reset --hard origin/v1.x
+                    git push origin main --force
 
-            - name: Fast-forward merge
-              run: |
-                  git merge --ff-only v1.x || exit 0
-
-            - name: Push updated main
-              run: |
-                  git push origin main
