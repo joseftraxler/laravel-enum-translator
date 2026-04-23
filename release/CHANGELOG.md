@@ -1,3 +1,23 @@
+## 1.0.0 (2026-04-23)
+
+### ✨ Features
+
+* added illuminate requirements ([67970b4](https://github.com/joseftraxler/laravel-enum-translator/commit/67970b441f427e6cbc5658dd9cf08bda057e4bb9))
+* added Trans attribute ([ccfbb8c](https://github.com/joseftraxler/laravel-enum-translator/commit/ccfbb8c181749a6e6831f1d7ee07c6c1641e258d))
+* added TranslatableEnum trait ([8255b4e](https://github.com/joseftraxler/laravel-enum-translator/commit/8255b4e969101238e19626e503d1317aa4521438))
+
+### 🐛 Bug Fixes
+
+* change enum lang file to enums ([1e94846](https://github.com/joseftraxler/laravel-enum-translator/commit/1e94846ce5c1185b02d1eefbcda617e3b77e4342))
+
+### ♻️ Maintenance
+
+* add basic tests ([5b2d375](https://github.com/joseftraxler/laravel-enum-translator/commit/5b2d375647fd4c4f94fa184fbbf8b0891b3399cd))
+* add CI label to README.md ([d22b22e](https://github.com/joseftraxler/laravel-enum-translator/commit/d22b22ef8d95baf10474f9a92d1828c7e4b91312))
+* add CI workflow ([4c1de3b](https://github.com/joseftraxler/laravel-enum-translator/commit/4c1de3b783b0b5e7e1c2973a8c6f3a1d5247db2f))
+* add README.md ([45e29c7](https://github.com/joseftraxler/laravel-enum-translator/commit/45e29c738bddc2914d3db8ede53556cbfedcfb7f))
+* fix formatting ([92b9223](https://github.com/joseftraxler/laravel-enum-translator/commit/92b922342499bbb59bc5e8aa264f850715f480fb))
+
 ## [1.21.0](https://github.com/joseftraxler/accounting/compare/v1.20.0...v1.21.0) (2026-04-10)
 
 ### ✨ Features
