@@ -59,7 +59,7 @@ echo MyEnum::MyValue->trans();
 The trait resolves translations in this order:
 
 1. **Attribute translation** (`#[Trans('…')]`)
-2. **Laravel translator** (`lang/en/enum.php`)
+2. **Laravel translator** (`lang/en/enums.php`)
 3. **Human‑readable fallback**
 
 ---
@@ -94,7 +94,7 @@ return [
 The translation key is automatically generated as:
 
 ```
-enum.{EnumClass}.{value or name}
+enums.{EnumClass}.{value or name}
 ```
 
 depending on whether the enum is backed.
