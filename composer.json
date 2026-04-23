@@ -51,6 +51,13 @@
         "stan": "phpstan analyse src tests/Examples tests/Stubs -l max",
         "test": "pest"
     },
+    "extra": {
+        "laravel": {
+            "providers": [
+                "JosefTraxler\\LaravelEnumTranslator\\TranslatorProvider"
+            ]
+        }
+    },
     "minimum-stability": "stable",
     "prefer-stable": true
 }

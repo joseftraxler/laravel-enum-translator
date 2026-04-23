@@ -5,10 +5,10 @@ declare(strict_types=1);
 namespace JosefTraxler\LaravelEnumTranslator\Attributes;
 
 #[\Attribute]
-class Trans
+class TranslatorNamespace
 {
     public function __construct(
-        public readonly string $label,
+        public readonly string $path,
     ) {
     }
 }
