@@ -4,15 +4,10 @@ declare(strict_types=1);
 
 namespace JosefTraxler\LaravelEnumTranslator;
 
-use Illuminate\Contracts\Foundation\Application;
+use Illuminate\Support\ServiceProvider;
 
-class TranslatorProvider
+class TranslatorProvider extends ServiceProvider
 {
-    public function __construct(
-        private readonly Application $app
-    ) {
-    }
-
     public function register(): void
     {
         $this->app->singleton(
