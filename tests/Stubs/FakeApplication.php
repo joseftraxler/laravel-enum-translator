@@ -6,6 +6,7 @@ namespace Tests\Stubs;
 
 use ArrayAccess;
 use Illuminate\Contracts\Foundation\Application;
+use JosefTraxler\LaravelEnumTranslator\Translator;
 
 /**
  * @implements ArrayAccess<string,mixed>
@@ -20,6 +21,15 @@ final class FakeApplication implements Application, ArrayAccess
         $this->instances['app'] = $this;
         $this->instances[Application::class] = $this;
         $this->instances[\Illuminate\Contracts\Container\Container::class] = $this;
+
+        $laravelTranslator = new FakeTranslator();
+        $this->instances['translator'] = $laravelTranslator;
+        $this->instances[\Illuminate\Contracts\Translation\Translator::class] = $laravelTranslator;
+
+        $translator = new Translator($laravelTranslator);
+
+        $this->instances[Translator::class] = $translator;
+        $this->instances[\JosefTraxler\LaravelEnumTranslator\Contracts\Translator::class] = $translator;
     }
 
     public function version()
