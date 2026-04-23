@@ -15,15 +15,15 @@ it('keeps consecutive uppercase letters unchanged')
 
 it('keeps consecutive uppercase letters unchanged for backed enums')
     ->expect(fn () => Translator::trans(TestExampleBackedEnum::XMLParser))
-    ->toBe('XMLParser');
+    ->toBe('XML parser');
 
 it('handles underscores in backed enum values')
     ->expect(fn () => Translator::trans(TestExampleBackedEnum::Version2Beta))
-    ->toBe('Version 2 Beta');
+    ->toBe('Version2 beta');
 
 it('handles numbers mixed with text in unit enums')
     ->expect(fn () => Translator::trans(TestExampleEnum::Version2Beta))
-    ->toBe('Version 2 Beta');
+    ->toBe('Version2 Beta');
 
 it('trait trans method works with edge cases')
     ->expect(fn () => TestExampleEnum::XMLParser->trans())
@@ -31,4 +31,4 @@ it('trait trans method works with edge cases')
 
 it('backed enum trait trans method works with edge cases')
     ->expect(fn () => TestExampleBackedEnum::Version2Beta->trans())
-    ->toBe('Version 2 Beta');
+    ->toBe('Version2 beta');

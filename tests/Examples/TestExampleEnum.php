@@ -9,7 +9,9 @@ use JosefTraxler\LaravelEnumTranslator\TranslatableEnum;
 enum TestExampleEnum
 {
     use TranslatableEnum;
-    case InProgress;
 
+    case InProgress;
     case PDF;
+    case XMLParser;
+    case Version2Beta;
 }
