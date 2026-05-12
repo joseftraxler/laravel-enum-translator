@@ -16,123 +16,15 @@ permissions:
 jobs:
     check-code:
         if: "!contains(github.event.head_commit.message, '[skip ci]')"
-        runs-on: ubuntu-latest
-        steps:
-            -   name: Checkout repository
-                uses: actions/checkout@v6
-
-            -   name: Setup PHP
-                uses: shivammathur/setup-php@v2
-                with:
-                    php-version: '8.5'
-                    coverage: none
-
-            -   name: Cache vendor
-                uses: actions/cache@v5
-                with:
-                    path: vendor
-                    key: vendor-${{ hashFiles('composer.lock') }}
-
-            -   name: Install composer
-                run: |
-                    composer config allow-plugins.pestphp/pest-plugin false
-                    composer install \
-                      --prefer-dist \
-                      --no-interaction \
-                      --no-progress \
-                      --no-scripts \
-                      --optimize-autoloader \
-                      --classmap-authoritative
-
-            -   name: Check PHP Code style
-                run: composer cs
-
-            -   name: Check static analysis
-                run: composer stan
+        uses: joseftraxler/.github/.github/workflows/check-php.yml@main
 
     tests:
         if: "!contains(github.event.head_commit.message, '[skip ci]')"
-        runs-on: ubuntu-latest
-        steps:
-            -   name: Checkout repository
-                uses: actions/checkout@v6
-
-            -   name: Setup PHP
-                uses: shivammathur/setup-php@v2
-                with:
-                    php-version: '8.5'
-                    coverage: xdebug
-
-            -   name: Cache vendor
-                uses: actions/cache@v5
-                with:
-                    path: vendor
-                    key: vendor-${{ hashFiles('composer.lock') }}
-
-            -   name: Install composer
-                run: |
-                    composer config allow-plugins.pestphp/pest-plugin false
-                    composer install \
-                      --prefer-dist \
-                      --no-interaction \
-                      --no-progress \
-                      --no-scripts \
-                      --optimize-autoloader \
-                      --classmap-authoritative
-
-            -   name: Run tests
-                run: ./vendor/bin/pest
+        uses: joseftraxler/.github/.github/workflows/pest.yml@main
 
     release:
-        if: >
-            github.event_name == 'push'
-            && !contains(github.event.head_commit.message, '[skip ci]')
-            && (
-                github.ref_name == 'main'
-                || (
-                    startsWith(github.ref_name, 'v')
-                    && contains(github.ref_name, '.x')
-                )
-            )
+        if: github.event_name == 'push'
         needs: [check-code, tests]
-        runs-on: ubuntu-latest
-
-        steps:
-            -   name: Checkout repository
-                uses: actions/checkout@v6
-                with:
-                    fetch-depth: 0
-
-            -   name: Cache release npm packages
-                uses: actions/cache@v5
-                with:
-                    path: |
-                        release/node_modules
-                        ~/.npm
-                    key: npm-release-${{ hashFiles('release/package-lock.json') }}
-
-            -   name: Setup Node.js
-                uses: actions/setup-node@v6
-                with:
-                    node-version: '24'
-
-            -   name: Install release packages
-                working-directory: release
-                run: |
-                    npm install --no-fund --prefer-offline --no-progress
-                    git config user.name "github-actions"
-                    git config user.email "github-actions@github.com"
-                    git add package-lock.json
-                    if git diff --cached --quiet; then
-                      echo "No changes in package-lock.json, skipping commit"
-                    else
-                      git commit -m "chore(release): release/package-lock.json updated [skip ci]"
-                      git push
-                    fi
-
-            -   name: Run semantic-release
-                working-directory: release
-                env:
-                    GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}
-                run: npx semantic-release
-
+        uses: joseftraxler/.github/.github/workflows/release.yml@main
+        with:
+            target: ${{ github.ref_name }}
