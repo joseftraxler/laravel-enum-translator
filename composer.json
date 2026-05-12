@@ -48,7 +48,7 @@
     "scripts": {
         "cs-fix": "php-cs-fixer fix",
         "cs": "php-cs-fixer check",
-        "stan": "phpstan analyse src tests/Examples tests/Stubs -l max",
+        "stan": "phpstan analyse -c phpstan.neon",
         "test": "pest"
     },
     "extra": {
