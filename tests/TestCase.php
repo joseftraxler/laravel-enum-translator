@@ -19,7 +19,9 @@ abstract class TestCase extends BaseTestCase
 
         Facade::setFacadeApplication(new Stubs\FakeApplication());
 
+        // @phpstan-ignore assign.propertyType
         $this->app = App::getFacadeRoot();
+        // @phpstan-ignore assign.propertyType
         $this->translator = App::make('translator');
     }
 }
