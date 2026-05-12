@@ -1,0 +1,8 @@
+parameters:
+	level: max
+	paths:
+		- src
+		- tests/Examples
+		- tests/Stubs
+		- tests/TestCase.php
+
