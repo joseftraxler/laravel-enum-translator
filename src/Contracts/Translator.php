@@ -8,5 +8,5 @@ use UnitEnum;
 
 interface Translator
 {
-    public function trans(UnitEnum $unit, ?string $locale = null): string;
+    public function trans(UnitEnum $enum, ?string $locale = null): string;
 }
