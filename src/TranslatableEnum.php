@@ -9,15 +9,20 @@ namespace JosefTraxler\LaravelEnumTranslator;
  */
 trait TranslatableEnum
 {
-    public function trans(): string
+    /**
+     * @param non-empty-string|null $locale
+     */
+    public function trans(?string $locale = null): string
     {
-        return Facades\Translator::trans($this);
+        return Facades\Translator::trans($this, $locale);
     }
 
     /**
+     * @param non-empty-string|null $locale
+     *
      * @phpstan-return array<(self is \BackedEnum ? value-of<self> : key-of<self>),string>
      */
-    public static function selectOptions(): array
+    public static function selectOptions(?string $locale = null): array
     {
         $result = [];
         // @phpstan-ignore-next-line
@@ -25,12 +30,11 @@ trait TranslatableEnum
             ? 'value'
             : 'name';
         foreach (self::cases() as $case) {
-            $result[$case->{$propName}] = $case->trans();
+            $result[$case->{$propName}] = $case->trans($locale);
         }
         return $result;
     }
 
-    #[\ReturnTypeWillChange]
     public function toHtml(): string
     {
         return $this->trans();
