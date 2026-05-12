@@ -64,7 +64,7 @@ class Translator implements TranslatorInterface
             return $value;
         }
 
-        $value =  str_replace(['_', '-'], ' ', $value);
+        $value = str_replace(['_', '-'], ' ', $value);
         $value = (string) preg_replace('/(?<!^)(?<![A-Z])([A-Z])/', ' $1', $value);
         $value = trim($value);
         $value = mb_ucfirst($value);
